@@ -4,7 +4,9 @@ import {fabric} from "fabric";
 class Canvas extends Component {
 
     componentDidMount() {
-        this.canvas = new fabric.Canvas('canvas');
+        this.canvas = new fabric.Canvas('canvas', {
+            preserveObjectStacking: true
+        });
         fabric.Object.prototype.objectCaching = false;
         this.props.canvas(this.canvas);
     }

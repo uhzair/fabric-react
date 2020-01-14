@@ -109,6 +109,16 @@ class App extends Component {
         }
     };
 
+    moveLayer = (direction) => {
+        if (this.canvas.getActiveObject() != null) {
+            if(direction === "UP")
+                this.canvas.getActiveObject().bringForward();
+            else
+                this.canvas.getActiveObject().sendBackwards();
+            this.canvas.renderAll();
+        }
+    };
+
     render() {
         return (
             <div className="container-fluid">
@@ -212,11 +222,17 @@ class App extends Component {
                     </div>
                     <div className="col-lg-8 col-md-12 border p-0 sectionDiv">
                         <div className="col-sm-12 m-2">
-                            <button id="flip-X" className="btn btn-info btn-sm ml-2" onClick={() => this.flip('X')}>
+                            <button className="btn btn-info btn-sm ml-2" onClick={() => this.flip('X')}>
                                 Flip X
                             </button>
-                            <button id="flip-Y" className="btn btn-info btn-sm ml-2" onClick={() => this.flip('Y')}>
+                            <button className="btn btn-info btn-sm ml-2" onClick={() => this.flip('Y')}>
                                 Flip Y
+                            </button>
+                            <button className="btn btn-info btn-sm ml-2" onClick={() => this.moveLayer('UP')}>
+                                Layer Up
+                            </button>
+                            <button className="btn btn-info btn-sm ml-2" onClick={() => this.moveLayer('DOWN')}>
+                                Layer Down
                             </button>
                         </div>
                         <Canvas canvas={(canvas) => {
